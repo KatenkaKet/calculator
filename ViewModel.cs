@@ -62,6 +62,7 @@ namespace Calcul_2
             {
                 Result += temp;
             }
+            
         }
 
         private void ExecuteDeleteLast(object parameter)
@@ -88,6 +89,17 @@ namespace Calcul_2
         {
             Result = "";
         }
+
+        //private void CheckString(object parameter)
+        //{
+        //    string operation = "+-*/()";
+        //    string a = parameter as string;
+        //    for(int i = 0; i < a.Length; i++)
+        //    {
+        //        if ((a[i] >= '0' && a[i] <= '9') || ())
+        //    }
+
+        //}
         
 
 

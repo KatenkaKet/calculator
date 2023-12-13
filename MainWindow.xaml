@@ -15,7 +15,7 @@
     <Grid Margin="20 20 20 20">
         <Grid.RowDefinitions>
             <RowDefinition  Height="2*"/>
-            <RowDefinition  Height="*"/>
+            <RowDefinition  Height="1.3*"/>
             <RowDefinition  Height="*"/>
             <RowDefinition  Height="*"/>
             <RowDefinition  Height="*"/>
@@ -46,8 +46,8 @@
         <Button Grid.Row="5" Grid.Column="0" Content="C" Margin="5" Background="#FFA200" Foreground="#A64D00" FontWeight="Bold" FontSize="20" Command="{Binding Delete}"/>
         <Button Grid.Row="4" Grid.Column="0" Content=")" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20"  Command="{Binding PushEnd}" CommandParameter=")"/>
         <Button Grid.Row="3" Grid.Column="0" Content="(" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20"  Command="{Binding PushEnd}" CommandParameter="("/>
-        <Button Grid.Row="6" Grid.Column="3" Content="=" Margin="5,5,5,0" Background="#FFA200" Foreground="#A64D00" FontWeight="Bold" FontSize="20" Height="45" VerticalAlignment="Top" Command="{Binding Equal}"/>
-        <Button Grid.Row="5" Grid.Column="4" Content="+" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20" Grid.RowSpan="2"  Command="{Binding PushEnd}" CommandParameter="+"/>
+        <Button Grid.Row="6" Grid.Column="3" Content="=" Margin="5,0,5,0" Background="#FFA200" Foreground="#A64D00" FontWeight="Bold" FontSize="20" Height="43" VerticalAlignment="Center" Command="{Binding Equal}"/>
+        <Button Grid.Row="5" Grid.Column="4" Content="+" Margin="5,5,5,5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20" Grid.RowSpan="2"  Command="{Binding PushEnd}" CommandParameter="+"/>
         <Button Grid.Row="4" Grid.Column="4" Content="-" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="30"  Command="{Binding PushEnd}" CommandParameter="-"/>
         <Button Grid.Row="3" Grid.Column="4" Content="*" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20"  Command="{Binding PushEnd}" CommandParameter="*"/>
         <Button Grid.Row="2" Grid.Column="4" Content="/" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20"  Command="{Binding PushEnd}" CommandParameter="/"/>
@@ -56,7 +56,7 @@
         <Button Grid.Row="2" Grid.Column="2" Content="M-" Margin="5" Background="#FFA200" Foreground="#A64D00" FontWeight="Bold" FontSize="20"/>
         <Button Grid.Row="2" Grid.Column="3" Content="M+" Margin="5" Background="#FFA200" Foreground="#A64D00" FontWeight="Bold" FontSize="20"/>
 
-        <TextBlock Grid.ColumnSpan="5" Margin="5" Grid.Row="1" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20" TextAlignment="Right" Text="{Binding Result}" TextWrapping="Wrap"/>
+        <TextBox Grid.ColumnSpan="5" Margin="5" Grid.Row="1" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20" TextAlignment="Right" Text="{Binding Result}" TextWrapping="Wrap" MaxLength="40"/>
 
 
 
