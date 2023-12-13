@@ -16,6 +16,7 @@ namespace Calcul_2
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private readonly Calculator _model;
+        private readonly CheckErrors _errors;
 
         private string _result;
         private bool _flag = false;
@@ -38,12 +39,14 @@ namespace Calcul_2
             DeleteLast = new RelayCommand(ExecuteDeleteLast);
             Equal = new RelayCommand(ExecuteEqual);
             Delete = new RelayCommand(ExecuteDelete);
+            _errors = new CheckErrors();
         }
 
         private void ExecuteAdd(object parameter)
         {
             string operation = "+-*/";
             string temp = parameter as string;
+            if (Result == "error") Result = "";
             if(this._flag == true)
             {
                 if (operation.IndexOf(temp) >= 0)
@@ -77,11 +80,19 @@ namespace Calcul_2
         {
             if(Result != "")
             {
-                _model.s = Result;
-                _model.i = 0;
-                double temp = _model.ProcE();
-                Result = temp.ToString();
-                this._flag = true;
+                _errors.expression = Result;
+                if (_errors.AvailableCharacters() == 1 && _errors.SyntacticAnalysis() == 1)
+                {
+                    _model.s = Result;
+                    _model.i = 0;
+                    double temp = _model.ProcE();
+                    Result = temp.ToString();
+                    this._flag = true;
+                }
+                else
+                {
+                    Result = "error";
+                }
             }
         }
 
@@ -90,17 +101,6 @@ namespace Calcul_2
             Result = "";
         }
 
-        //private void CheckString(object parameter)
-        //{
-        //    string operation = "+-*/()";
-        //    string a = parameter as string;
-        //    for(int i = 0; i < a.Length; i++)
-        //    {
-        //        if ((a[i] >= '0' && a[i] <= '9') || ())
-        //    }
-
-        //}
-        
 
 
     }
