@@ -8,7 +8,7 @@ namespace Calcul_2
 {
     class CheckErrors
     {
-        public string expression;
+        public string expression = "";
         public int AvailableCharacters()
         {
             string availablecharacters = "+-*/,()0123456789";
@@ -22,44 +22,88 @@ namespace Calcul_2
             return 1; // успешное
         }
 
-        //2) несколько знаков подряд
         public int SyntacticAnalysis()
         {
-            int comma = 0;          // количество запятых в числе
-            bool number = false;
-            int bracketleft = 0;    // количество '('
-            int bracketright = 0;   // количество ')'
-            string sign = "";       // хранит подряд идущие арифметические знаки
+            if (String.IsNullOrEmpty(expression)) return 0;
+            if (AvailableCharacters() == 0) return 0;
+            if (SyntacticAnalysisBracket() == 0) return 0;
+            if (SyntacticAnalysisnNumbers() == 0) return 0;
 
-            string operation1 = "+*/";
-            if (operation1.IndexOf(expression[0]) >= 0) return 0; // строка начинается с "+*/"
+            //string sign = "";       // хранит подряд идущие арифметические знаки
 
-            for (int i = 0; i < expression.Length-1; i++)
-            {
-                if (expression[i] == '(') bracketleft++;
-                if (expression[i] == ')') bracketright++;
-                if (bracketright > bracketleft) return 0; // ошибка в скобках
+            //string operation1 = "+*/";
+            //if (operation1.IndexOf(expression[0]) >= 0) return 0; // строка начинается с "+*/"
 
-                // надо ещё подумать
-                if (expression[i] >= '0' && expression[i] <= '9') number = true;
-                else { number = false; comma = 0; }
-                if (expression[i] == ',' && number == true) comma++;
-                else if(expression[i] == ',' && number == false) return 0; // проверка на запятую в неположенном месте
-                if(comma > 1) return 0; // проверка на наличие нескольких запятых в 1 числе
+            //for (int i = 0; i < expression.Length; i++)
+            //{
 
-                //проверка на знак
-                if (operation1.IndexOf(expression[i]) >= 0 || expression[i] == '-') sign += expression[i];
-                else sign = "";
-                if (sign.Length > 1) return 0; // проверка на несколько подряд идущих знаков
+            //    //проверка на знак
+            //    if (operation1.IndexOf(expression[i]) >= 0 || expression[i] == '-') sign += expression[i];
+            //    else sign = "";
+            //    if (sign.Length > 1) return 0; // проверка на несколько подряд идущих знаков
 
 
-                // Дописать сброс данных при переходе из одного состояния в другое
-            }
-            if(bracketleft != bracketright) return 0; // не одинаковое количество скобок
+            //    // Дописать сброс данных при переходе из одного состояния в другое
+            //}
+
             return 1; //успешное
         }
-        
-        
+
+        // Проверка на скобки
+        public int SyntacticAnalysisBracket()
+        {
+            int bracketleft = 0;    // количество '('
+            int bracketright = 0;   // количество ')'
+            if (expression[0] == '(') bracketleft++;
+            if (expression[0] == ')') bracketright++;
+            if (expression.Length > 1)
+            {
+                int i = 1;
+                do
+                {
+                    if (expression[i - 1] == '(' && expression[i] == ')' || expression[i - 1] == ')' && expression[i] == '(') return 0;
+                    if (expression[i] == '(') bracketleft++;
+                    if (expression[i] == ')') bracketright++;
+                    if (bracketright > bracketleft) return 0; // ошибка в скобках
+                    i++;
+                } while (i < expression.Length);
+                if (bracketleft != bracketright) return 0; // не одинаковое количество скобок
+            }
+            else if (expression.Length == 1) { }
+            {
+                if (bracketleft != bracketright) return 0;
+            }
+            return 1;
+        }
+
+        // Проверка на запятые
+        public int SyntacticAnalysisnNumbers()
+        {
+            string number = "";
+            for (int i = 0; i < expression.Length; i++)
+            {
+                if (expression[i] >= '0' && expression[i] <= '9' || expression[i] == ',')
+                {
+                    number += expression[i];
+                }
+                else if (number != "")
+                {
+                    if (number[0] == '.' || number[number.Length - 1] == '.') return 0;
+                    try { double number2 = double.Parse(number); }
+                    catch (Exception) { return 0; }
+                    number = "";
+                }
+            }
+            if (number != "")
+            {
+                if (number[0] == ',' || number[number.Length - 1] == '.') return 0;
+                try { double number2 = double.Parse(number); }
+                catch (Exception) { return 0; }
+            }
+            return 1;
+        }
+
+
 
     }
 
@@ -105,10 +149,12 @@ namespace Calcul_2
         }
         public double ProcM()
         {
-            double x = 0; if (s[i] == '(')
+            double x = 0; 
+            if (s[i] == '(')
             {
                 i++;
-                x = ProcE(); if (s[i] != ')')
+                x = ProcE(); 
+                if (s[i] != ')')
                 {
                     Console.WriteLine("missing ')'");
                 }

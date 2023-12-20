@@ -42,12 +42,13 @@ namespace Calcul_2
             _errors = new CheckErrors();
         }
 
+        // запись входных параметров
         private void ExecuteAdd(object parameter)
         {
             string operation = "+-*/";
             string temp = parameter as string;
             if (Result == "error") Result = "";
-            if(this._flag == true)
+            if (this._flag == true)
             {
                 if (operation.IndexOf(temp) >= 0)
                 {
@@ -68,6 +69,7 @@ namespace Calcul_2
             
         }
 
+        // удаление последнего элемента
         private void ExecuteDeleteLast(object parameter)
         {
             if(Result != "")
@@ -76,12 +78,13 @@ namespace Calcul_2
             }
         }
 
+        // Вчисление выражения
         private void ExecuteEqual(object parameter)
         {
-            if(Result != "")
+            if(!String.IsNullOrEmpty(Result))
             {
                 _errors.expression = Result;
-                if (_errors.AvailableCharacters() == 1 && _errors.SyntacticAnalysis() == 1)
+                if (_errors.SyntacticAnalysis() == 1)
                 {
                     _model.s = Result;
                     _model.i = 0;
@@ -96,6 +99,7 @@ namespace Calcul_2
             }
         }
 
+        //очистка
         private void ExecuteDelete(object parameter)
         {
             Result = "";
