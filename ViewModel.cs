@@ -17,22 +17,25 @@ namespace Calcul_2
 
         private readonly Calculator _model;
         private readonly CheckErrors _errors;
+        private readonly IMemory _currentmemory;
 
         private string _result;
         private bool _flag = false;
+        private string s;
+        private string history;
 
-        public ICommand PushEnd{get; }
+        public ICommand PushEnd {get; }
         public ICommand DeleteLast { get; }
         public ICommand Equal { get; }
         public ICommand Delete {  get; }
+        public string CalcMemory { get { return history; } set { history = _currentmemory.Save(value); PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CalcMemory))); } }
 
         public string Result
         {
             get { return _result; }
-            set { _result = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Result)));
-            }
+            set { _result = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Result))); }
         }
-        public ViewModel()
+        public ViewModel(IMemory memory)
         {
             _model = new Calculator();
             PushEnd = new RelayCommand(ExecuteAdd);
@@ -40,6 +43,7 @@ namespace Calcul_2
             Equal = new RelayCommand(ExecuteEqual);
             Delete = new RelayCommand(ExecuteDelete);
             _errors = new CheckErrors();
+            _currentmemory = memory;
         }
 
         // запись входных параметров
@@ -48,7 +52,7 @@ namespace Calcul_2
             string operation = "+-*/";
             string temp = parameter as string;
             if (Result == "error") Result = "";
-            if (this._flag == true)
+            if (_flag == true)
             {
                 if (operation.IndexOf(temp) >= 0)
                 {
@@ -60,7 +64,7 @@ namespace Calcul_2
                     Result += temp;
 
                 }
-                this._flag = false;
+                _flag = false;
             }
             else
             {
@@ -83,6 +87,7 @@ namespace Calcul_2
         {
             if(!String.IsNullOrEmpty(Result))
             {
+                s = Result;
                 _errors.expression = Result;
                 if (_errors.SyntacticAnalysis() == 1)
                 {
@@ -96,10 +101,12 @@ namespace Calcul_2
                 {
                     Result = "error";
                 }
+                s += "=" + Result;
+                CalcMemory = s;
             }
         }
 
-        //очистка
+        // Oчистка
         private void ExecuteDelete(object parameter)
         {
             Result = "";

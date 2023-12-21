@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calcul_2
 {
-    class CheckErrors
+    public class CheckErrors
     {
         public string expression = "";
         public int AvailableCharacters()
@@ -72,7 +72,7 @@ namespace Calcul_2
                 }
                 else if (number != "")
                 {
-                    if (number[0] == '.' || number[number.Length - 1] == '.') return 0;
+                    if (number[0] == ',' || number[number.Length - 1] == ',') return 0;
                     try { double number2 = double.Parse(number); }
                     catch (Exception) { return 0; }
                     number = "";
@@ -80,13 +80,13 @@ namespace Calcul_2
             }
             if (number != "")
             {
-                if (number[0] == ',' || number[number.Length - 1] == '.') return 0;
+                if (number[0] == ',' || number[number.Length - 1] == ',') return 0;
                 try { double number2 = double.Parse(number); }
                 catch (Exception) { return 0; }
             }
             return 1;
         }
-
+        // Проверка на знаки
         public int SyntacticAnalysisSign()
         {
             string sign = "";
@@ -104,9 +104,10 @@ namespace Calcul_2
                     sign = "";
                 }
             }
+            if (operation.IndexOf(expression[expression.Length - 1]) > -1 && operation.IndexOf(expression[expression.Length - 1]) < 4) return 0;
             return 1;
         }
-
+        // Вспомогательная функция для предыдущей функции
         public int SyntacticAnalysisSignAuxiliary(string sign, int j)
         {
             string oper = "+-*/";
@@ -149,7 +150,7 @@ namespace Calcul_2
     }
 
 
-    class Calculator
+    public class Calculator
     {
         public string s;
         public int i = 0; // индекс элемента

@@ -1,0 +1,4 @@
+C:\Users\Ilonochka\Desktop\TRPO\new\Calcul_2\obj\Debug\net6.0-windows7.0\MainWindow.g.cs
+C:\Users\Ilonochka\Desktop\TRPO\new\Calcul_2\obj\Debug\net6.0-windows7.0\App.g.cs
+C:\Users\Ilonochka\Desktop\TRPO\new\Calcul_2\obj\Debug\net6.0-windows7.0\Calcul_2_MarkupCompile.cache
+C:\Users\Ilonochka\Desktop\TRPO\new\Calcul_2\obj\Debug\net6.0-windows7.0\Calcul_2_MarkupCompile.lref

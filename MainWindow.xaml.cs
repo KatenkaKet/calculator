@@ -24,12 +24,12 @@ namespace Calcul_2
         {
             InitializeComponent();
 
-            DataContext = new ViewModel();
+            IMemory memoryRAM = new RAM();
+            IMemory memoryDB = new DataBase();
+            IMemory memoryF = new File();
+
+            DataContext = new ViewModel(memoryRAM);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
