@@ -28,23 +28,7 @@ namespace Calcul_2
             if (AvailableCharacters() == 0) return 0;
             if (SyntacticAnalysisBracket() == 0) return 0;
             if (SyntacticAnalysisnNumbers() == 0) return 0;
-
-            //string sign = "";       // хранит подряд идущие арифметические знаки
-
-            //string operation1 = "+*/";
-            //if (operation1.IndexOf(expression[0]) >= 0) return 0; // строка начинается с "+*/"
-
-            //for (int i = 0; i < expression.Length; i++)
-            //{
-
-            //    //проверка на знак
-            //    if (operation1.IndexOf(expression[i]) >= 0 || expression[i] == '-') sign += expression[i];
-            //    else sign = "";
-            //    if (sign.Length > 1) return 0; // проверка на несколько подряд идущих знаков
-
-
-            //    // Дописать сброс данных при переходе из одного состояния в другое
-            //}
+            if (SyntacticAnalysisSign() == 0) return 0;
 
             return 1; //успешное
         }
@@ -103,7 +87,64 @@ namespace Calcul_2
             return 1;
         }
 
+        public int SyntacticAnalysisSign()
+        {
+            string sign = "";
+            string operation = "+-/*()";
+            if (expression[0] == '+' || expression[0] == '*' || expression[0] == '/') return 0;
+            for (int i = 0; i < expression.Length; i++)
+            {
+                if (operation.IndexOf(expression[i]) != -1)
+                {
+                    sign += expression[i];
+                }
+                else if (sign != "")
+                {
+                    if (SyntacticAnalysisSignAuxiliary(sign, i) == 0) return 0;
+                    sign = "";
+                }
+            }
+            return 1;
+        }
 
+        public int SyntacticAnalysisSignAuxiliary(string sign, int j)
+        {
+            string oper = "+-*/";
+            if (sign.Length == 1 && oper.IndexOf(sign[0]) != -1) return 1;
+            else if (sign.Length == 2)
+            {
+                if (oper.IndexOf(sign[0]) != -1 && sign[1] == '(') return 1;
+                else if (sign[0] == ')' && oper.IndexOf(sign[1]) != -1) return 1;
+                else return 0;
+            }
+            else
+            {
+                if (oper.IndexOf(sign[0]) != -1 || sign[0] == '(')
+                {
+                    int i = 1;
+                    while (i < sign.Length)
+                    {
+                        if (sign[i] != '(') break;
+                        i++;
+                    }
+                    if (i == sign.Length) return 1;
+                    else if (i == sign.Length - 1 && sign[i] == '-') return 1;
+                    else return 0;
+                }
+                else
+                {
+                    int i = 0;
+                    while (i < sign.Length)
+                    {
+                        if (sign[i] != ')') break;
+                        i++;
+                    }
+                    if (j == expression.Length - 1) return 1;
+                    if (i == sign.Length - 1 && oper.IndexOf(sign[i]) != -1) return 1;
+                    else return 0;
+                }
+            }
+        }
 
     }
 
