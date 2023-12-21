@@ -30,7 +30,7 @@
             <ColumnDefinition  Width="*"/>
         </Grid.ColumnDefinitions>
 
-
+        <ListBox Grid.Row="0" Grid.ColumnSpan="5" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="14">fhcgvhbmnm</ListBox>
         <Button Grid.Row="6" Grid.Column="1" Content="0" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20"  Command="{Binding PushEnd}" CommandParameter="0"/>
         <Button Grid.Row="6" Grid.Column="2" Content="," Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20"  Command="{Binding PushEnd}" CommandParameter=","/>
         <Button Grid.Row="5" Grid.Column="1" Content="1" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20"  Command="{Binding PushEnd}" CommandParameter="1"/>
