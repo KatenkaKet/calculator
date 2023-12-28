@@ -29,7 +29,7 @@
             <ColumnDefinition  Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="5" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="14" TextAlignment="Left" Text="{Binding CalcMemory}"/> 
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="5" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="14" TextAlignment="Left" TextWrapping="Wrap" Text="{Binding CalcMemory}"/> 
         <Button Grid.Row="5" Grid.Column="1" Content="0" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20"  Command="{Binding PushEnd}" CommandParameter="0"/>
         <Button Grid.Row="5" Grid.Column="2" Content="," Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20"  Command="{Binding PushEnd}" CommandParameter=","/>
         <Button Grid.Row="4" Grid.Column="1" Content="1" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20"  Command="{Binding PushEnd}" CommandParameter="1"/>
@@ -52,7 +52,7 @@
         <Button Grid.Row="2" Grid.Column="4" Content="/" Margin="5" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20"  Command="{Binding PushEnd}" CommandParameter="/"/>
         
 
-        <TextBox Grid.ColumnSpan="5" Margin="5" Grid.Row="1" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20" TextAlignment="Right" Text="{Binding Result}" TextWrapping="Wrap" MaxLength="40"/>
+        <TextBox Grid.ColumnSpan="5" Margin="5" Grid.Row="1" Background="#FFD340" Foreground="#A64D00" FontWeight="Bold" FontSize="20" TextAlignment="Right" Text="{Binding Result}" TextWrapping="Wrap" MaxLength="30"/>
 
 
 

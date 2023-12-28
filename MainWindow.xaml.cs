@@ -28,7 +28,7 @@ namespace Calcul_2
             IMemory memoryDB = new DataBase();
             IMemory memoryF = new FileMemory();
 
-            DataContext = new ViewModel(memoryRAM);
+            DataContext = new ViewModel(memoryDB);
         }
 
     }

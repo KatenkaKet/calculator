@@ -18,3 +18,7 @@ C:\Users\Ilonochka\Desktop\TRPO\new\Calcul_2\obj\Debug\net6.0-windows\refint\Cal
 C:\Users\Ilonochka\Desktop\TRPO\new\Calcul_2\obj\Debug\net6.0-windows\Calcul_2.pdb
 C:\Users\Ilonochka\Desktop\TRPO\new\Calcul_2\obj\Debug\net6.0-windows\Calcul_2.genruntimeconfig.cache
 C:\Users\Ilonochka\Desktop\TRPO\new\Calcul_2\obj\Debug\net6.0-windows\ref\Calcul_2.dll
+C:\Users\Ilonochka\Desktop\TRPO\new\Calcul_2\bin\Debug\net6.0-windows\MySql.Data.dll
+C:\Users\Ilonochka\Desktop\TRPO\new\Calcul_2\bin\Debug\net6.0-windows\MySql.Data.xml
+C:\Users\Ilonochka\Desktop\TRPO\new\Calcul_2\obj\Debug\net6.0-windows\Calcul_2.csproj.AssemblyReference.cache
+C:\Users\Ilonochka\Desktop\TRPO\new\Calcul_2\obj\Debug\net6.0-windows\Calcul_2.csproj.CopyComplete
