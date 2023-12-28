@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,54 +10,92 @@ namespace Calcul_2
     public interface IMemory
     {
 
-        void Load();
+        string Load();
         string Save(string s);
     }
 
     class DataBase : IMemory
     {
         
-        public void Load()
+        public string Load()
         {
             throw new NotImplementedException();
         }
 
         public string Save(string s)
         {
+
             throw new NotImplementedException();
         }
     }
 
-    class File : IMemory
+    class FileMemory : IMemory
     {
-        
-        public void Load()
+        string file_name = "File_History.txt";
+        string history = "";
+        int j = 0;
+        public string Load()
         {
-            throw new NotImplementedException();
+            history = File.ReadAllText(file_name);
+            string[] partofhistory = history.Split('\n');
+            history = "";
+            j = partofhistory.Length;
+            if (j > 6)
+            {
+                for (int i = j - 6; i < j; i++)
+                {
+                    history += partofhistory[i] + "\n";
+                }
+            }
+            else
+            {
+                for (int i = 0; i < j; i++)
+                {
+                    if (partofhistory[i] != "")
+                        history += partofhistory[i] + "\n";
+                }
+            }
+            return history;
         }
 
         public string Save(string s)
         {
-            throw new NotImplementedException();
+            File.AppendAllText(file_name, s+"\n");
+            if (j < 5)
+            {
+                history += s + "\n";
+                j++;
+            }
+            else
+            {
+                string[] partofhistory = history.Split('\n');
+                history = "";
+                for (int i = 1; i < 5; i++)
+                {
+                    history += partofhistory[i] + "\n";
+                }
+                history += s + "\n";
+            }
+            return history;
         }
     }
 
     class RAM : IMemory
     {
         string history = "";
-        int i = 0;
+        int j = 0;
         public string History {get {return history; }}
-        public void Load()
+        public string Load()
         {
-            throw new NotImplementedException();
+            return history;
         }
 
         public string Save(string s)
         {
-            if (i < 5)
+            if (j < 5)
             {
                 history += s + "\n";
-                i++;
+                j++;
             }
             else
             {

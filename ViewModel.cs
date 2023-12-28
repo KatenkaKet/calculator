@@ -28,7 +28,10 @@ namespace Calcul_2
         public ICommand DeleteLast { get; }
         public ICommand Equal { get; }
         public ICommand Delete {  get; }
-        public string CalcMemory { get { return history; } set { history = _currentmemory.Save(value); PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CalcMemory))); } }
+        public string CalcMemory 
+        { 
+            get { return history; } 
+            set { history = _currentmemory.Save(value); PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CalcMemory))); } }
 
         public string Result
         {
@@ -44,6 +47,7 @@ namespace Calcul_2
             Delete = new RelayCommand(ExecuteDelete);
             _errors = new CheckErrors();
             _currentmemory = memory;
+            history = _currentmemory.Load();
         }
 
         // запись входных параметров
